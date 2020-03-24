@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.AdministrableRoleAuthorizationsDao">
+
+    <resultMap type=".entity.AdministrableRoleAuthorizations" id="AdministrableRoleAuthorizationsMap">
+        <result property="user" column="USER" jdbcType="VARCHAR"/>
+        <result property="host" column="HOST" jdbcType="VARCHAR"/>
+        <result property="grantee" column="GRANTEE" jdbcType="VARCHAR"/>
+        <result property="granteeHost" column="GRANTEE_HOST" jdbcType="VARCHAR"/>
+        <result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR"/>
+        <result property="roleHost" column="ROLE_HOST" jdbcType="VARCHAR"/>
+        <result property="isGrantable" column="IS_GRANTABLE" jdbcType="VARCHAR"/>
+        <result property="isDefault" column="IS_DEFAULT" jdbcType="VARCHAR"/>
+        <result property="isMandatory" column="IS_MANDATORY" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AdministrableRoleAuthorizationsMap">
+        select
+          USER, HOST, GRANTEE, GRANTEE_HOST, ROLE_NAME, ROLE_HOST, IS_GRANTABLE, IS_DEFAULT, IS_MANDATORY
+        from information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS
+        where  = #{}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AdministrableRoleAuthorizationsMap">
+        select
+          USER, HOST, GRANTEE, GRANTEE_HOST, ROLE_NAME, ROLE_HOST, IS_GRANTABLE, IS_DEFAULT, IS_MANDATORY
+        from information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AdministrableRoleAuthorizationsMap">
+        select
+          USER, HOST, GRANTEE, GRANTEE_HOST, ROLE_NAME, ROLE_HOST, IS_GRANTABLE, IS_DEFAULT, IS_MANDATORY
+        from information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS
+        <where>
+            <if test="user != null and user != ''">
+                and USER = #{user}
+            </if>
+            <if test="host != null and host != ''">
+                and HOST = #{host}
+            </if>
+            <if test="grantee != null and grantee != ''">
+                and GRANTEE = #{grantee}
+            </if>
+            <if test="granteeHost != null and granteeHost != ''">
+                and GRANTEE_HOST = #{granteeHost}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and ROLE_NAME = #{roleName}
+            </if>
+            <if test="roleHost != null and roleHost != ''">
+                and ROLE_HOST = #{roleHost}
+            </if>
+            <if test="isGrantable != null and isGrantable != ''">
+                and IS_GRANTABLE = #{isGrantable}
+            </if>
+            <if test="isDefault != null and isDefault != ''">
+                and IS_DEFAULT = #{isDefault}
+            </if>
+            <if test="isMandatory != null and isMandatory != ''">
+                and IS_MANDATORY = #{isMandatory}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS(USER, HOST, GRANTEE, GRANTEE_HOST, ROLE_NAME, ROLE_HOST, IS_GRANTABLE, IS_DEFAULT, IS_MANDATORY)
+        values (#{user}, #{host}, #{grantee}, #{granteeHost}, #{roleName}, #{roleHost}, #{isGrantable}, #{isDefault}, #{isMandatory})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS
+        <set>
+            <if test="user != null and user != ''">
+                USER = #{user},
+            </if>
+            <if test="host != null and host != ''">
+                HOST = #{host},
+            </if>
+            <if test="grantee != null and grantee != ''">
+                GRANTEE = #{grantee},
+            </if>
+            <if test="granteeHost != null and granteeHost != ''">
+                GRANTEE_HOST = #{granteeHost},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                ROLE_NAME = #{roleName},
+            </if>
+            <if test="roleHost != null and roleHost != ''">
+                ROLE_HOST = #{roleHost},
+            </if>
+            <if test="isGrantable != null and isGrantable != ''">
+                IS_GRANTABLE = #{isGrantable},
+            </if>
+            <if test="isDefault != null and isDefault != ''">
+                IS_DEFAULT = #{isDefault},
+            </if>
+            <if test="isMandatory != null and isMandatory != ''">
+                IS_MANDATORY = #{isMandatory},
+            </if>
+        </set>
+        where  = #{}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from information_schema.ADMINISTRABLE_ROLE_AUTHORIZATIONS where  = #{}
+    </delete>
+
+</mapper>

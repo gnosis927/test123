@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.AppRegistDao">
+
+    <resultMap type=".entity.AppRegist" id="AppRegistMap">
+        <result property="pId" column="p_ID" jdbcType="INTEGER"/>
+        <result property="rName" column="r_Name" jdbcType="VARCHAR"/>
+        <result property="rAge" column="r_Age" jdbcType="INTEGER"/>
+        <result property="rTel" column="r_Tel" jdbcType="INTEGER"/>
+        <result property="rMail" column="r_Mail" jdbcType="VARCHAR"/>
+        <result property="rSid" column="r_Sid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AppRegistMap">
+        select
+          p_ID, r_Name, r_Age, r_Tel, r_Mail, r_Sid
+        from mydatabase.app_regist
+        where p_ID = #{pId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AppRegistMap">
+        select
+          p_ID, r_Name, r_Age, r_Tel, r_Mail, r_Sid
+        from mydatabase.app_regist
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AppRegistMap">
+        select
+          p_ID, r_Name, r_Age, r_Tel, r_Mail, r_Sid
+        from mydatabase.app_regist
+        <where>
+            <if test="pId != null">
+                and p_ID = #{pId}
+            </if>
+            <if test="rName != null and rName != ''">
+                and r_Name = #{rName}
+            </if>
+            <if test="rAge != null">
+                and r_Age = #{rAge}
+            </if>
+            <if test="rTel != null">
+                and r_Tel = #{rTel}
+            </if>
+            <if test="rMail != null and rMail != ''">
+                and r_Mail = #{rMail}
+            </if>
+            <if test="rSid != null and rSid != ''">
+                and r_Sid = #{rSid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="pId" useGeneratedKeys="true">
+        insert into mydatabase.app_regist(r_Name, r_Age, r_Tel, r_Mail, r_Sid)
+        values (#{rName}, #{rAge}, #{rTel}, #{rMail}, #{rSid})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mydatabase.app_regist
+        <set>
+            <if test="rName != null and rName != ''">
+                r_Name = #{rName},
+            </if>
+            <if test="rAge != null">
+                r_Age = #{rAge},
+            </if>
+            <if test="rTel != null">
+                r_Tel = #{rTel},
+            </if>
+            <if test="rMail != null and rMail != ''">
+                r_Mail = #{rMail},
+            </if>
+            <if test="rSid != null and rSid != ''">
+                r_Sid = #{rSid},
+            </if>
+        </set>
+        where p_ID = #{pId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from mydatabase.app_regist where p_ID = #{pId}
+    </delete>
+
+</mapper>
