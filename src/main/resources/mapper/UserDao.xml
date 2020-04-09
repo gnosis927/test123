@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.UserDao">
+
+    <resultMap type="com.example.entity.User" id="UserMap">
+        <result property="pId" column="p_ID" jdbcType="INTEGER"/>
+        <result property="rName" column="r_name" jdbcType="VARCHAR"/>
+        <result property="rAge" column="r_age" jdbcType="INTEGER"/>
+        <result property="rTel" column="r_tel" jdbcType="VARCHAR"/>
+        <result property="rMail" column="r_mail" jdbcType="VARCHAR"/>
+        <result property="rSid" column="r_sid" jdbcType="VARCHAR"/>
+        <result property="rPwd" column="r_pwd" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          p_ID, r_name, r_age, r_tel, r_mail, r_sid, r_pwd
+        from study.user
+        where p_ID = #{pId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          p_ID, r_name, r_age, r_tel, r_mail, r_sid, r_pwd
+        from study.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          p_ID, r_name, r_age, r_tel, r_mail, r_sid, r_pwd
+        from study.user
+        <where>
+            <if test="pId != null">
+                and p_ID = #{pId}
+            </if>
+            <if test="rName != null and rName != ''">
+                and r_name = #{rName}
+            </if>
+            <if test="rAge != null">
+                and r_age = #{rAge}
+            </if>
+            <if test="rTel != null and rTel != ''">
+                and r_tel = #{rTel}
+            </if>
+            <if test="rMail != null and rMail != ''">
+                and r_mail = #{rMail}
+            </if>
+            <if test="rSid != null and rSid != ''">
+                and r_sid = #{rSid}
+            </if>
+            <if test="rPwd != null and rPwd != ''">
+                and r_pwd = #{rPwd}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="pId" useGeneratedKeys="true">
+        insert into study.user(r_name, r_age, r_tel, r_mail, r_sid, r_pwd)
+        values (#{rName}, #{rAge}, #{rTel}, #{rMail}, #{rSid}, #{rPwd})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update study.user
+        <set>
+            <if test="rName != null and rName != ''">
+                r_name = #{rName},
+            </if>
+            <if test="rAge != null">
+                r_age = #{rAge},
+            </if>
+            <if test="rTel != null and rTel != ''">
+                r_tel = #{rTel},
+            </if>
+            <if test="rMail != null and rMail != ''">
+                r_mail = #{rMail},
+            </if>
+            <if test="rSid != null and rSid != ''">
+                r_sid = #{rSid},
+            </if>
+            <if test="rPwd != null and rPwd != ''">
+                r_pwd = #{rPwd},
+            </if>
+        </set>
+        where p_ID = #{pId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from study.user where p_ID = #{pId}
+    </delete>
+
+</mapper>

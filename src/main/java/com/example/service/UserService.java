@@ -1,15 +1,15 @@
-package .service;
+package com.example.service;
 
-import .entity.AppAccount;
+import com.example.entity.User;
 import java.util.List;
 
 /**
- * (AppAccount)表服务接口
+ * (User)表服务接口
  *
  * @author makejava
- * @since 2020-03-23 19:34:12
+ * @since 2020-04-08 23:45:03
  */
-public interface AppAccountService {
+public interface UserService {
 
     /**
      * 通过ID查询单条数据
@@ -17,7 +17,7 @@ public interface AppAccountService {
      * @param pId 主键
      * @return 实例对象
      */
-    AppAccount queryById(Integer pId);
+    User queryById(Integer pId);
 
     /**
      * 查询多条数据
@@ -26,23 +26,23 @@ public interface AppAccountService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<AppAccount> queryAllByLimit(int offset, int limit);
+    List<User> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param appAccount 实例对象
+     * @param user 实例对象
      * @return 实例对象
      */
-    AppAccount insert(AppAccount appAccount);
+    User insert(User user);
 
     /**
      * 修改数据
      *
-     * @param appAccount 实例对象
+     * @param user 实例对象
      * @return 实例对象
      */
-    AppAccount update(AppAccount appAccount);
+    User update(User user);
 
     /**
      * 通过主键删除数据

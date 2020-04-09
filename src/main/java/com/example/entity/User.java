@@ -1,15 +1,15 @@
-package entity;
+package com.example.entity;
 
 import java.io.Serializable;
 
 /**
- * (AppRegist)实体类
+ * (User)实体类
  *
  * @author makejava
- * @since 2020-03-23 19:33:50
+ * @since 2020-04-08 23:45:01
  */
-public class AppRegist implements Serializable {
-    private static final long serialVersionUID = 941885505719917433L;
+public class User implements Serializable {
+    private static final long serialVersionUID = -94532863899376175L;
     
     private Integer pId;
     
@@ -17,11 +17,13 @@ public class AppRegist implements Serializable {
     
     private Integer rAge;
     
-    private Integer rTel;
+    private String rTel;
     
     private String rMail;
     
     private String rSid;
+    
+    private String rPwd;
 
 
     public Integer getPId() {
@@ -48,11 +50,11 @@ public class AppRegist implements Serializable {
         this.rAge = rAge;
     }
 
-    public Integer getRTel() {
+    public String getRTel() {
         return rTel;
     }
 
-    public void setRTel(Integer rTel) {
+    public void setRTel(String rTel) {
         this.rTel = rTel;
     }
 
@@ -70,6 +72,14 @@ public class AppRegist implements Serializable {
 
     public void setRSid(String rSid) {
         this.rSid = rSid;
+    }
+
+    public String getRPwd() {
+        return rPwd;
+    }
+
+    public void setRPwd(String rPwd) {
+        this.rPwd = rPwd;
     }
 
 }

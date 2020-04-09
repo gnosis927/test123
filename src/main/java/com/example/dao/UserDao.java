@@ -1,16 +1,16 @@
-package .dao;
+package com.example.dao;
 
-import .entity.AppRegist;
+import com.example.entity.User;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * (AppRegist)表数据库访问层
+ * (User)表数据库访问层
  *
  * @author makejava
- * @since 2020-03-23 19:33:52
+ * @since 2020-04-08 23:45:02
  */
-public interface AppRegistDao {
+public interface UserDao {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface AppRegistDao {
      * @param pId 主键
      * @return 实例对象
      */
-    AppRegist queryById(Integer pId);
+    User queryById(Integer pId);
 
     /**
      * 查询指定行数据
@@ -27,32 +27,32 @@ public interface AppRegistDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<AppRegist> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<User> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param appRegist 实例对象
+     * @param user 实例对象
      * @return 对象列表
      */
-    List<AppRegist> queryAll(AppRegist appRegist);
+    List<User> queryAll(User user);
 
     /**
      * 新增数据
      *
-     * @param appRegist 实例对象
+     * @param user 实例对象
      * @return 影响行数
      */
-    int insert(AppRegist appRegist);
+    int insert(User user);
 
     /**
      * 修改数据
      *
-     * @param appRegist 实例对象
+     * @param user 实例对象
      * @return 影响行数
      */
-    int update(AppRegist appRegist);
+    int update(User user);
 
     /**
      * 通过主键删除数据
