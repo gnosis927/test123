@@ -24,7 +24,11 @@ public class UserController {
     }
 
     @RequestMapping("login")
-    public ServerResponse login(@RequestParam("tel") String tel,@RequestParam("pwd")String pwd){
+    public ServerResponse login( String tel,String pwd){
         return userService.login(tel,pwd);
+    }
+    @RequestMapping("signin")
+    public ServerResponse signIn(User user){
+        return userService.signIn(user);
     }
 }

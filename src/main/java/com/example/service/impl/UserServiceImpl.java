@@ -97,4 +97,14 @@ public class UserServiceImpl implements UserService {
             return ServerResponse.createSRBySuccess(user);
         }
     }
+    /**
+     * 注册
+     */
+    public ServerResponse signIn(User user){
+        int count=this.userDao.insert(user);
+        if(count==0){
+            return ServerResponse.createSRByFail(ResponseCode.SIGN_ERROR.getCode(), ResponseCode.SIGN_ERROR.getMsg());
+        }
+        return ServerResponse.createSRBySuccess(1000000);
+    }
 }
