@@ -94,5 +94,17 @@
     <delete id="deleteById">
         delete from study.user where p_ID = #{pId}
     </delete>
+    <!--验证用户是否存在-->
+    <select id="isFindUser" parameterType="string" resultType="int">
+        select count(*)
+        from study.user where r_tel=#{tel}
+    </select>
+    <!--验证用户密码是否正确-->
+    <select id="findUserTaP" parameterType="map" resultMap="UserMap">
+        select
+          p_ID, r_name, r_age, r_tel, r_mail, r_sid, r_pwd
+        from study.user
+        where r_tel = #{tel} and r_pwd= #{pwd}
+    </select>
 
 </mapper>

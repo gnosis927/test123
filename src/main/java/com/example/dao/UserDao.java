@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.example.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * (User)表数据库访问层
  *
  * @author makejava
- * @since 2020-04-08 23:45:02
+ * @since 2020-04-09 23:11:15
  */
 public interface UserDao {
 
@@ -62,4 +63,12 @@ public interface UserDao {
      */
     int deleteById(Integer pId);
 
+    /**
+     *用户是否存在
+     */
+    Integer isFindUser(@Param("tel")String tel);
+    /**
+     *用户密码是否匹配
+     */
+    User findUserTaP(@Param("tel")String tel,@Param("pwd")String pwd);
 }

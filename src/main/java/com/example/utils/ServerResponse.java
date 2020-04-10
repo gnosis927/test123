@@ -60,10 +60,10 @@ public class ServerResponse<T> {
     public static <T> ServerResponse createSRBySuccess(T data,String msg){
         return new ServerResponse(0,data,msg);
     }
-    public static ServerResponse createSRBySuccess(int status){
+    public static ServerResponse createSRByFail(int status){
         return new ServerResponse(status);
     }
-    public static ServerResponse createSRBySuccess(int status,String msg){
+    public static ServerResponse createSRByFail(int status,String msg){
         return new ServerResponse(status,null,msg);
     }
 

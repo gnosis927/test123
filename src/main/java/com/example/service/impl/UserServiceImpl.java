@@ -1,8 +1,10 @@
 package com.example.service.impl;
 
+import com.example.common.ResponseCode;
 import com.example.entity.User;
 import com.example.dao.UserDao;
 import com.example.service.UserService;
+import com.example.utils.ServerResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,7 +14,7 @@ import java.util.List;
  * (User)表服务实现类
  *
  * @author makejava
- * @since 2020-04-08 23:45:04
+ * @since 2020-04-09 23:11:16
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -75,5 +77,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Integer pId) {
         return this.userDao.deleteById(pId) > 0;
+    }
+
+    /**
+     * 登录
+     */
+    public ServerResponse login(String tel,String pwd){
+        Integer count=this.userDao.isFindUser(tel);
+
+        if(count==0) {
+            return ServerResponse.createSRByFail(ResponseCode.USER_NULL.getCode(), ResponseCode.USER_NULL.getMsg());
+        }
+        else{
+            User user=this.userDao.findUserTaP(tel,pwd);
+            if(null==user){
+                return  ServerResponse.createSRByFail(ResponseCode.USER_ERROR.getCode(), ResponseCode.USER_ERROR.getMsg());
+            }
+
+            return ServerResponse.createSRBySuccess(user);
+        }
     }
 }

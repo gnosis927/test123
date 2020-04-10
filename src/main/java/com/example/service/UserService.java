@@ -1,13 +1,16 @@
 package com.example.service;
 
 import com.example.entity.User;
+import com.example.utils.ServerResponse;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
  * (User)表服务接口
  *
  * @author makejava
- * @since 2020-04-08 23:45:03
+ * @since 2020-04-09 23:11:16
  */
 public interface UserService {
 
@@ -51,5 +54,11 @@ public interface UserService {
      * @return 是否成功
      */
     boolean deleteById(Integer pId);
+
+    /**
+     * 登录
+     *
+     */
+    public ServerResponse login(String tel,String pwd);
 
 }
