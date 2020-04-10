@@ -5,6 +5,7 @@ import com.example.entity.User;
 import com.example.dao.UserDao;
 import com.example.service.UserService;
 import com.example.utils.ServerResponse;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -84,7 +85,6 @@ public class UserServiceImpl implements UserService {
      */
     public ServerResponse login(String tel,String pwd){
         Integer count=this.userDao.isFindUser(tel);
-
         if(count==0) {
             return ServerResponse.createSRByFail(ResponseCode.USER_NULL.getCode(), ResponseCode.USER_NULL.getMsg());
         }
