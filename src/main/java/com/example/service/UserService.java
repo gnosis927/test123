@@ -60,5 +60,10 @@ public interface UserService {
      *
      */
     public ServerResponse login(String tel,String pwd);
+    /**
+     * 注册
+     *
+     */
+    public ServerResponse regist(User user);
 
 }

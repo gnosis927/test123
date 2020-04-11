@@ -27,4 +27,8 @@ public class UserController {
     public ServerResponse login(@RequestParam("tel") String tel,@RequestParam("pwd")String pwd){
         return userService.login(tel,pwd);
     }
+    @RequestMapping("regist")
+    public ServerResponse regist(User user){
+        return userService.regist(user);
+    }
 }
