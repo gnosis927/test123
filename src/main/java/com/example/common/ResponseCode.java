@@ -4,7 +4,8 @@ public enum  ResponseCode {
 
     USER_NULL(1,"无用户"),
     USER_ERROR(2,"密码错误"),
-    SIGN_ERROR(3,"注册失败")
+    REGIST_ERROR(3,"创建失败"),
+
     ;
 
 

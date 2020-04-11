@@ -96,6 +96,22 @@ public class UserServiceImpl implements UserService {
 
             return ServerResponse.createSRBySuccess(user);
         }
+
+    }
+    /**
+     * 注册
+     */
+    public ServerResponse regist(User user){
+        Integer judge=this.userDao.insert(user);
+
+        if(judge==0) {
+            return ServerResponse.createSRByFail(ResponseCode.REGIST_ERROR.getCode(), ResponseCode.REGIST_ERROR.getMsg());
+        }
+        else{
+
+            return ServerResponse.createSRBySuccess(user);
+        }
+
     }
     /**
      * 注册

@@ -59,6 +59,11 @@ public interface UserService {
      * 登录
      */
     public ServerResponse login(String tel,String pwd);
+    /**
+     * 注册
+     *
+     */
+    public ServerResponse regist(User user);
 
     /**
      * 注册
