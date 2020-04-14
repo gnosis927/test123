@@ -66,14 +66,7 @@ public interface UserService {
     public ServerResponse regist(User user);
 
     /**
-     * 注册
-     */
-    public ServerResponse signIn(User user);
-
-    /**
      * 模糊搜索某商品返回所有一个货物list,货物list包含limit个货物信息
      */
-    public ServerResponse signIn(String goods_name,int limit);
-
 
 }

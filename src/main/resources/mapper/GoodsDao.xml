@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.GoodsDao">
+
+    <resultMap type="com.example.entity.Goods" id="GoodsMap">
+        <result property="gId" column="g_ID" jdbcType="INTEGER"/>
+        <result property="gName" column="g_name" jdbcType="VARCHAR"/>
+        <result property="gNum" column="g_num" jdbcType="INTEGER"/>
+        <result property="gPrice" column="g_price" jdbcType="OTHER"/>
+        <result property="gKind" column="g_kind" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="GoodsMap">
+        select
+          g_ID, g_name, g_num, g_price, g_kind
+        from collegeserver.goods
+        where g_ID = #{gId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="GoodsMap">
+        select
+          g_ID, g_name, g_num, g_price, g_kind
+        from collegeserver.goods
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="GoodsMap">
+        select
+          g_ID, g_name, g_num, g_price, g_kind
+        from collegeserver.goods
+        <where>
+            <if test="gId != null">
+                and g_ID = #{gId}
+            </if>
+            <if test="gName != null and gName != ''">
+                and g_name = #{gName}
+            </if>
+            <if test="gNum != null">
+                and g_num = #{gNum}
+            </if>
+            <if test="gPrice != null">
+                and g_price = #{gPrice}
+            </if>
+            <if test="gKind != null and gKind != ''">
+                and g_kind = #{gKind}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="gId" useGeneratedKeys="true">
+        insert into collegeserver.goods(g_name, g_num, g_price, g_kind)
+        values (#{gName}, #{gNum}, #{gPrice}, #{gKind})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update collegeserver.goods
+        <set>
+            <if test="gName != null and gName != ''">
+                g_name = #{gName},
+            </if>
+            <if test="gNum != null">
+                g_num = #{gNum},
+            </if>
+            <if test="gPrice != null">
+                g_price = #{gPrice},
+            </if>
+            <if test="gKind != null and gKind != ''">
+                g_kind = #{gKind},
+            </if>
+        </set>
+        where g_ID = #{gId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from collegeserver.goods where g_ID = #{gId}
+    </delete>
+    <!--商品查询-->
+    <select id="FindGoods" parameterType="map" resultMap="GoodsMap">
+        select
+        g_ID, g_name, g_num, g_price, g_kind
+        from collegeserver.goods
+        <where>
+            <if test="gName!=null">
+                or g_name like '%${gName}%'
+            </if>
+            <if test="gKind!=null">
+                or g_kind=#{gKind}
+            </if>
+        </where>
+    </select>
+
+</mapper>

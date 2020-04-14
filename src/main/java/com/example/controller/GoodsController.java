@@ -1,7 +1,10 @@
 package com.example.controller;
 
 import com.example.entity.Goods;
+import com.example.entity.User;
 import com.example.service.GoodsService;
+import com.example.service.UserService;
+import com.example.utils.ServerResponse;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,21 +18,15 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("goods")
 public class GoodsController {
-    /**
-     * 服务对象
-     */
-    @Resource
-    private GoodsService goodsService;
+    public final GoodsService GoodsService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Goods selectOne(Integer id) {
-        return this.goodsService.queryById(id);
+    public GoodsController(GoodsService GoodsService) {
+        this.GoodsService = GoodsService;
+    }
+
+    @RequestMapping("search")
+    public ServerResponse Search(String good_name, String good_kind){
+        return GoodsService.Search(good_name,good_kind);
     }
 
 }

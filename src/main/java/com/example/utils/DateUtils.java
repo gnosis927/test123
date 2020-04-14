@@ -30,6 +30,6 @@ public class DateUtils {
            return StringUtils.EMPTY;
        }
        DateTime dateTime=new DateTime(date);
-       return dateTime.toString();
+       return dateTime.toString(STANDARD);
     }
 }

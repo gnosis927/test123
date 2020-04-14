@@ -61,5 +61,5 @@ public interface GoodsDao {
      * @return 影响行数
      */
     int deleteById(Integer gId);
-
+    List<Goods> FindGoods(String gName, String gKind);
 }

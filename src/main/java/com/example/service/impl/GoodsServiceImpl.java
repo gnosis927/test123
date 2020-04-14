@@ -1,8 +1,10 @@
 package com.example.service.impl;
 
+import com.example.common.ResponseCode;
 import com.example.entity.Goods;
 import com.example.dao.GoodsDao;
 import com.example.service.GoodsService;
+import com.example.utils.ServerResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -75,5 +77,20 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public boolean deleteById(Integer gId) {
         return this.goodsDao.deleteById(gId) > 0;
+    }
+
+    /**
+     * 搜索
+     */
+    public ServerResponse Search(String goods_name, String goods_kind){
+        List<Goods> goods=this.goodsDao.FindGoods(goods_name,goods_kind);
+        if(null==goods) {
+            return ServerResponse.createSRByFail(ResponseCode.SEARCH_NULL.getCode(), ResponseCode.SEARCH_NULL.getMsg());
+        }
+        else{
+
+            return ServerResponse.createSRBySuccess(goods);
+        }
+
     }
 }
