@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.entity.Goods;
+import com.example.entity.User;
 import com.example.utils.ServerResponse;
 
 import java.util.List;
@@ -54,5 +55,6 @@ public interface GoodsService {
      */
     boolean deleteById(Integer gId);
     public ServerResponse Search(String goods_name, String goods_kind);
+    public ServerResponse Addgoods(Goods goods);
 //    public ServerResponse Search(String goods_name);
 }

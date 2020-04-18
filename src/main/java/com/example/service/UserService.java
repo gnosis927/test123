@@ -57,6 +57,7 @@ public interface UserService {
 
     /**
      * 登录
+     *
      */
     public ServerResponse login(String tel,String pwd);
     /**
@@ -64,9 +65,10 @@ public interface UserService {
      *
      */
     public ServerResponse regist(User user);
-
     /**
-     * 模糊搜索某商品返回所有一个货物list,货物list包含limit个货物信息
+     * 修改用户信息
+     *
      */
+    public ServerResponse modify(User user);
 
 }

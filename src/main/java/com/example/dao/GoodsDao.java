@@ -61,5 +61,8 @@ public interface GoodsDao {
      * @return 影响行数
      */
     int deleteById(Integer gId);
-    List<Goods> FindGoods(String gName, String gKind);
+
+    /**通过关键词搜索商品*/
+
+    List<Goods> FindGoods(String gName,String gKind);
 }

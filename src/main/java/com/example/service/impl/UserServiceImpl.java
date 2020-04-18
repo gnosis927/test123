@@ -113,6 +113,19 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+    /**
+     * 修改个人信息
+     */
+    public ServerResponse modify(User user){
+        Integer judge=this.userDao.update(user);
 
+        if(judge==0) {
+            return ServerResponse.createSRByFail(ResponseCode.MODIFY_ERROR.getCode(), ResponseCode.MODIFY_ERROR.getMsg());
+        }
+        else{
 
+            return ServerResponse.createSRBySuccess(user);
+        }
+
+    }
 }

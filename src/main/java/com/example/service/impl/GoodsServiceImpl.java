@@ -93,4 +93,19 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
     }
+    /**
+     * 添加商品
+     */
+    public ServerResponse Addgoods(Goods goods)
+    {
+        Integer judge=this.goodsDao.insert(goods);
+
+        if(judge==0) {
+            return ServerResponse.createSRByFail(ResponseCode.ADDGOODS_ERROR.getCode(), ResponseCode.ADDGOODS_ERROR.getMsg());
+        }
+        else{
+
+            return ServerResponse.createSRBySuccess(goods);
+        }
+    }
 }
